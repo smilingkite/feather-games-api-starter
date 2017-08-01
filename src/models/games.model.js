@@ -8,14 +8,14 @@ module.exports = function (app) {
 
   const cardSchema = new Schema({
     symbol: { type: Number, required: true },
-    visible: { type: Boolean, default: false },
-    won: { type: Boolean, default: false },
+    selected: { type: Boolean, default: false },
+    won: { type: Boolean, default: false }
   });
 
   const playerSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'users' },
     pairs: [String],
-    hand: [cardSchema],
+    hand: [cardSchema]
   });
 
   const games = new Schema({
@@ -26,7 +26,7 @@ module.exports = function (app) {
     winnerId: { type: Schema.Types.ObjectId, ref: 'users' },
     userId: { type: Schema.Types.ObjectId, ref: 'users' },
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
     // lastCard: { type: Number },
   });
 

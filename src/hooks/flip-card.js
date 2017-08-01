@@ -32,57 +32,27 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
         const newCards = cards.map((c, i) => {
           if (i === hook.data.flip) {
-            return Object.assign({}, c, { visible: true });
+            return Object.assign({}, c, { selected: true });
           }
           return c;
         });
 
-        const visibleCards = newCards.filter((c) => (c.visible));
+        const selectedCards = newCards.filter((c) => (c.selected));
 
-        if (visibleCards.length > 2) {
-          throw new errors.Unprocessable('You can not flip more than 2 cards!');
+        if (selectedCards.length > 1) {
+          throw new errors.Unprocessable('You can not flip more than 1 card!');
         }
-
-        if (visibleCards.length === 2) {
-          const symbols = visibleCards.map((c) => (c.symbol))
+        // if both users have flipped a card, check which card is the highest > that user gets the cards.
+        if (selectedCards.length === 2) {
+          const symbols = selectedCards.map((c) => (c.symbol))
 
           // set the lastCard
           hook.data.lastCard = hook.data.flip;
 
-          // flip all the cards back to not visible
-          hook.data.cards = cards.map((c) => (
-            Object.assign({}, c, { visible: false }))
-          );
-
-          if (symbols[0] === symbols[1]) {
-            let newPlayers = players;
-            newPlayers[turn].pairs.push(symbols[0]);
-            hook.data.players = newPlayers;
-            // set the cards to won: true
-            hook.data.cards = hook.data.cards.map((c) => {
-              if (c.symbol === symbols[0]) {
-                return Object.assign({}, c, { won: true });
-              }
-              return c;
-            });
-
-            const wonCards = hook.data.cards.filter((c) => (c.won));
-
-            if (wonCards.length === cards.length) {
-              const ranked = newPlayers.sort((a, b) => (b.pairs.length - a.pairs.length));
-              const winner = ranked[0];
-              const secondPlace = ranked[1];
-
-              if (secondPlace && secondPlace.pairs.length === winner.pairs.length) {
-                hook.data.draw = true;
-              } else {
-                hook.data.winnerId = winner.userId;
-              }
-            }
-
-            // done! Player won this pair, keeps the turn
-            return hook;
-          }
+          // flip all the cards back to not selected
+          // hook.data.cards = cards.map((c) => (
+          //   Object.assign({}, c, { selected: false }))
+          // );
 
           // next player's turn!
           let newTurn = turn + 1;

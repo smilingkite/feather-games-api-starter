@@ -1,41 +1,36 @@
-// function shuffle(array) {
-//   let counter = array.length;
-//
-//   while (counter > 0) {
-//     let index = Math.floor(Math.random() * counter);
-//     counter --;
-//     let temp = array[counter];
-//     array[counter] = array[index];
-//     array[index] = temp;
-//   }
-//   return array;
-// }
-//
-// function create_hand(cards) {
-//   var hand_1 = (cards.slice(0, 3));
-//   var hand_2 = (cards.slice(3, 6));
-//   return hand_1, hand_2;
-// }
+function shuffle(array) {
+  let counter = array.length;
+
+  while (counter > 0) {
+    let index = Math.floor(Math.random() * counter);
+    counter --;
+    let temp = array[counter];
+    array[counter] = array[index];
+    array[index] = temp;
+  }
+  return array;
+}
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function (hook) {
+    // if (hook.data.player.hand !== undefined) return Promise.resolve(hook);
+    return hook.app.service('games').get(hook.id)
+      .then((game) => {
+        const { players, hand, cards } = game; // eslint-disable-line no-unused-vars
 
-    const { user } = hook.params;
+        hook.data.userId = user._id,
+        hook.data.players = [{
+          userId: user._id,
+          hand: []
+        }];
 
-    // Hooks can either return nothing or a promise
-    // that resolves with the `hook` object for asynchronous operations
-    // var cards = shuffle(Array(40).fill(0).map((e,i)=>i+1));
-    // var hand_1;
-    // var hand_2;
-    // hand_1, hand_2 = create_hand(cards);
-    // hook.data.set = cards;
+        const shuffled_cards = shuffle(Array(40).fill(0).map((e,i)=>i+1));
+        const { user } = hook.params;
 
-    hook.data.userId = user._id,
-    hook.data.players = [{
-      userId: user._id,
-      hand: [] // maybe needs to be player_1_hand etc.
-    }];
+        hook.data.cards = shuffled_cards
+          .map((symbol) => ({ selected: false, symbol:symbol }));
 
-    return Promise.resolve(hook);
+        return Promise.resolve(hook);
+      });
   };
 };
