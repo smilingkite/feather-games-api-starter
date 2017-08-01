@@ -21,6 +21,8 @@ const ownerSchema = {
 
 const joinGame = require('../../hooks/join-game');
 
+const deal = require('../../hooks/deal');
+
 const flipCard = require('../../hooks/flip-card');
 
 const gameStats = require('../../hooks/game-stats');
@@ -31,7 +33,7 @@ module.exports = {
     find: [],
     get: [],
     create: [createGame()],
-    update: [joinGame(), flipCard()],
+    update: [joinGame(), deal(), flipCard()],
     patch: [joinGame(), flipCard()],
     remove: []
   },
