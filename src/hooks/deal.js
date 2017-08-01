@@ -34,10 +34,14 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         var player_1, player_2 = find_players(game);// eslint-disable-line no-unused-vars
 
         hook.data.set = shuffled_cards;
-        hook.data.userId = user._id,
+        hook.data.userId = player_1._id, player_2._id,
         hook.data.players = [{
-          userId: user._id,
-          hand: []
+          userId: player_1._id,
+          hand: hand_1
+        },
+        {
+          userId: player_2._id,
+          hand: hand_2
         }];
 
         return Promise.resolve(hook);
