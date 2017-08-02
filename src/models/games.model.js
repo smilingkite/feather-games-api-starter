@@ -14,13 +14,15 @@ module.exports = function (app) {
 
   const playerSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: 'users' },
-    pairs: [String],
-    hand: [cardSchema]
   });
 
   const games = new Schema({
     cards: [cardSchema],
     players: [playerSchema],
+    hand1: [cardSchema],
+    hand2: [cardSchema],
+    score1: { type: Number},
+    score2: { type: Number},
     turn: { type: Number, default: 0 }, // player index
     started: { type: Boolean, default: false },
     winnerId: { type: Schema.Types.ObjectId, ref: 'users' },

@@ -10,7 +10,6 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     if (hook.data.join === undefined) return Promise.resolve(hook);
 
     const { user } = hook.params;
-
     // see if player already present
     return hook.app.service('games').get(hook.id)
       .then((game) => {
@@ -22,7 +21,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
         if (!joined && wantsToJoin) {
           hook.data = {
-            players: players.concat({ userId: user._id, hand: []  })
+            players: players.concat({ userId: user._id })
           };
         }
 

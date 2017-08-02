@@ -10,7 +10,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
     // see if hook.data has { flip: Number }
     if (hook.data.flip === undefined) return Promise.resolve(hook);
 
-    console.log(`flipping card ${hook.data.flip}`);
+    console.log(`flipping card ${hook.data.flip}`);// eslint-disable-line
 
     const { user } = hook.params;
 

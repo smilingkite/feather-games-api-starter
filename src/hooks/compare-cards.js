@@ -6,10 +6,12 @@
 function compareCards(Card1, Card2) {
   if (Card1 > Card2) return Card1 ;
   return Card2;
+  // set 'won' attribute  on card to true;
 }
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function (hook) {
+    console.log("compareCards hook called")
     if (hook.data.player.hand.selectedCard !== undefined) return Promise.resolve(hook);
 
     return hook.app.service('games').get(hook.id)
