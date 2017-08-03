@@ -18,10 +18,8 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         var hand_1 = hands[0];
         var hand_2 = hands[1];
         console.log(hand_1);// eslint-disable-line
-        hook.data = {
-          hand1: hand_1,
-          hand2: hand_2,
-        };
+        hook.data.hand1 = hand_1;
+        hook.data.hand2 = hand_2;
 
         debugger;// eslint-disable-line
 

@@ -36,7 +36,7 @@ module.exports = {
     get: [],
     create: [createGame()],
     update: [joinGame(), flipCard()],
-    patch: [joinGame(), compareCards(), deal()],
+    patch: [joinGame(), deal()],
     remove: []
   },
 
