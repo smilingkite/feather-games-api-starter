@@ -11,7 +11,7 @@ function compareCards(Card1, Card2) {
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function (hook) {
     console.log("compareCards hook called") // eslint-disable-line
-    if (hook.data.player.hand.selectedCard !== undefined) return Promise.resolve(hook);
+    if (hook.data.player.hand1.selectedCard !== undefined) return Promise.resolve(hook);
 
     return hook.app.service('games').get(hook.id)
       .then((game) => {
