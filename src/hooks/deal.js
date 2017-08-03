@@ -9,18 +9,18 @@ function create_hand(cards) {
 
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function (hook) {
-    console.log("deal function started") // eslint-disable-line
+    console.log("deal hook started") // eslint-disable-line
     if (hook.data.hand1 !== undefined) return Promise.resolve(hook);
     return hook.app.service('games').get(hook.id)
       .then((game) => {
         const { cards } = game;
-        var hands = create_hand(cards);// eslint-disable-line no-unused-vars
+        var hands = create_hand(cards);
         var hand_1 = hands[0];
         var hand_2 = hands[1];
         console.log(hand_1);// eslint-disable-line
         hook.data = {
           hand1: hand_1,
-          hand2: hand_2
+          hand2: hand_2,
         };
 
         debugger;// eslint-disable-line
