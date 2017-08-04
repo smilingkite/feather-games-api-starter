@@ -32,5 +32,16 @@
       "passwordField": "password"
     }
   }
+  "jwt": {
+    "header": {
+      "type": "access"
+    },
+    "audience": "https://simplecardgame.herokuapp.com",
+    "subject": "anonymous",
+    "issuer": "simplecardgame",
+    "algorithm": "HS256",
+    "expiresIn": "1d"
+  },
+
 
 }
