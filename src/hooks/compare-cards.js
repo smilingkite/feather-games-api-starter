@@ -17,7 +17,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
       .then((game) => {
         const { hand1, hand2 , score1, score2 } = game;
         if (hook.data.game === undefined) return Promise.resolve(hook);
-        if (hook.data.game.hand1.selectedCard !== undefined) return Promise.resolve(hook);
+        if (hand1.selectedCard !== undefined) return Promise.resolve(hook);
 
         var Card1 = hand1.filter(function(hand){
           return hand.selected;
