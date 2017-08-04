@@ -23,7 +23,7 @@ const joinGame = require('../../hooks/join-game');
 
 const deal = require('../../hooks/deal');
 
-// const compareCards = require('../../hooks/compare-cards');
+const compareCards = require('../../hooks/compare-cards');
 
 const flipCard = require('../../hooks/flip-card');
 
@@ -35,8 +35,8 @@ module.exports = {
     find: [],
     get: [],
     create: [createGame()],
-    update: [joinGame(),  flipCard()],
-    patch: [joinGame(), deal()],
+    update: [joinGame(), flipCard()],
+    patch: [joinGame(), compareCards(), deal()],
     remove: []
   },
 

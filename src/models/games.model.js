@@ -21,8 +21,8 @@ module.exports = function (app) {
     players: [playerSchema],
     hand1: [cardSchema],
     hand2: [cardSchema],
-    score1: { type: Number},
-    score2: { type: Number},
+    score1: { type: Number, default: 0},
+    score2: { type: Number, default: 0},
     turn: { type: Number, default: 0 }, // player index
     started: { type: Boolean, default: false },
     winnerId: { type: Schema.Types.ObjectId, ref: 'users' },

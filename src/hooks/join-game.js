@@ -16,7 +16,7 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         const { players } = game;
         const wantsToJoin = hook.data.join;
         const joined = players.map((p) => (p.userId)).includes(user._id);
-        console.log("> join game hook called")
+        console.log("> join game hook called") // eslint-disable-line
         hook.data = {};
 
         if (!joined && wantsToJoin) {
@@ -25,7 +25,6 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
 
           };
         }
-        console.log("----> join game hook called")
         if (joined && !wantsToJoin) {
           hook.data = {
             players: players.filter((p) => (p.userId !== user._id))
