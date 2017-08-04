@@ -51,6 +51,7 @@
   },
   "devDependencies": {
     "eslint": "^4.3.0",
+    "eslint-config-google": "^0.9.1",
     "mocha": "^3.4.2",
     "nodemon": "^1.11.0",
     "request": "^2.81.0",
