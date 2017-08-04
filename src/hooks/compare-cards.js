@@ -11,11 +11,14 @@ function compareCards(Card1, Card2) {
 module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
   return function (hook) {
     console.log("compareCards hook called") // eslint-disable-line
-    if (hook.data.player.hand1.selectedCard !== undefined) return Promise.resolve(hook);
+
 
     return hook.app.service('games').get(hook.id)
       .then((game) => {
         const { hand1, hand2 , score1, score2 } = game;
+        if (hook.data.game === undefined) return Promise.resolve(hook);
+        if (hook.data.game.hand1.selectedCard !== undefined) return Promise.resolve(hook);
+
         var Card1 = hand1.filter(function(hand){
           return hand.selected;
         });
@@ -28,6 +31,20 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         } else {
           score2+1;
         }
+
+        var newHand1 = hand1.filter(function(hand){
+          return !hand.selected;
+        });
+
+        var newHand2 = hand2.filter(function(hand){
+          return !hand.selected;
+        });
+
+        hook.data.score1 = score1;
+        hook.data.score2 = score2;
+        hook.data.hand1 = newHand1;
+        hook.data.hand2 = newHand2;
+        return Promise.resolve(hook);
       });
 
     // Hooks can either return nothing or a promise

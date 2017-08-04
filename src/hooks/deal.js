@@ -21,8 +21,6 @@ module.exports = function (options = {}) { // eslint-disable-line no-unused-vars
         hook.data.hand1 = hand_1;
         hook.data.hand2 = hand_2;
 
-        debugger;// eslint-disable-line
-
         return Promise.resolve(hook);
       });
   };
